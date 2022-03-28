@@ -19,6 +19,12 @@ namespace playfabdemofunction
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
+            /**
+            * For demo purposes this is sufficient, for production use its strongly recommendet to use the PlayFab Instance APIs instead and use dependecy injection within function.
+            * To learn more check out:
+            * - https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
+            * - https://multiplayer.cloud/dependency-injection-with-the-playfab-sdk/
+            */
             PlayFabSettings.staticSettings.DeveloperSecretKey = Environment.GetEnvironmentVariable("DeveloperSecretKey");
             PlayFabSettings.staticSettings.TitleId = Environment.GetEnvironmentVariable("TitleId");
             FunctionExecutionContext<dynamic> context = JsonConvert.DeserializeObject<FunctionExecutionContext<dynamic>>(await req.ReadAsStringAsync());
